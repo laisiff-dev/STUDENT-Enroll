@@ -2277,66 +2277,160 @@ html_content = '''<!DOCTYPE html>
             const sf = DASHBOARD_DATA.shenqing_funnel;
             const er = DASHBOARD_DATA.enrolled_regions;
 
-            if (currentYear === 'all') {
-                document.getElementById('kpiTitle1').innerText = '5年總一階通過人數';
-                document.getElementById('kpiValue1').innerHTML = '8,492 <span style="font-size:16px">人次</span>';
-                document.getElementById('kpiDesc1').innerText = '甄選 2,632 人次 ‧ 申請 5,860 人次';
+            if (currentChannel === 'zhenxuan') {
+                if (currentYear === 'all') {
+                    document.getElementById('kpiTitle1').innerText = '5年甄選一階通過人數';
+                    document.getElementById('kpiValue1').innerHTML = '2,632 <span style="font-size:16px">人次</span>';
+                    document.getElementById('kpiDesc1').innerText = '技高體系生源 ‧ 專利/衛護/家商群為主';
 
-                document.getElementById('kpiTitle2').innerText = '5年總正式報到人數';
-                document.getElementById('kpiValue2').innerHTML = '1,284 <span style="font-size:16px">人</span>';
-                document.getElementById('kpiDesc2').innerText = '甄選 527 人 ‧ 申請 757 人';
+                    document.getElementById('kpiTitle2').innerText = '5年甄選正式報到人數';
+                    document.getElementById('kpiValue2').innerHTML = '527 <span style="font-size:16px">人</span>';
+                    document.getElementById('kpiDesc2').innerText = '佔全校總報到人數 41.0%';
 
-                document.getElementById('kpiTitle3').innerText = '申請入學就讀轉換率';
-                document.getElementById('kpiValue3').innerText = '32.8%';
-                document.getElementById('kpiDesc3').innerHTML = '二階報名 2,310人 ➔ 報到 757人';
+                    document.getElementById('kpiTitle3').innerText = '甄選一階轉二階報名率';
+                    document.getElementById('kpiValue3').innerText = '79.0%';
+                    document.getElementById('kpiDesc3').innerText = '二階報名 1,816 人次 ‧ 高繼續率';
 
-                document.getElementById('kpiTitle4').innerText = '甄選入學分發報到率';
-                document.getElementById('kpiValue4').innerText = '95.6%';
-                document.getElementById('kpiDesc4').innerText = '分發即確定就讀 ‧ 高黏著強意願';
+                    document.getElementById('kpiTitle4').innerText = '甄選志願分發報到率';
+                    document.getElementById('kpiValue4').innerText = '95.6%';
+                    document.getElementById('kpiDesc4').innerText = '志願分發即確定就讀 ‧ 強烈就讀意願';
 
-                document.getElementById('kpiTitle5').innerText = '高屏在地生源就讀比率';
-                document.getElementById('kpiValue5').innerText = '60.6%';
-                document.getElementById('kpiDesc5').innerText = '5年累計 778 人 ‧ 地利扎根核心';
+                    document.getElementById('kpiTitle5').innerText = '甄選高屏在地生源比率';
+                    document.getElementById('kpiValue5').innerText = '64.3%';
+                    document.getElementById('kpiDesc5').innerText = '5年累計 339 人 ‧ 技高地利核心';
+                } else {
+                    const zItem = zf.find(x => x.year === currentYear) || {};
+                    const zPass = zItem.p1_pass_cnt || 0;
+                    const zEnrolled = zItem.enrolled || 0;
+                    const zRateYr = zItem.admitted_to_enrolled_rate !== '—' ? zItem.admitted_to_enrolled_rate : (zItem.p1_to_p2_rate || '—');
+
+                    document.getElementById('kpiTitle1').innerText = `${currentYear}學年甄選一階通過`;
+                    document.getElementById('kpiValue1').innerHTML = `${zPass.toLocaleString()} <span style="font-size:16px">人次</span>`;
+                    document.getElementById('kpiDesc1').innerText = `通過人數 ${zItem.p1_pass_people || zPass} 人`;
+
+                    document.getElementById('kpiTitle2').innerText = `${currentYear}學年甄選正式報到`;
+                    document.getElementById('kpiValue2').innerHTML = `${zEnrolled} <span style="font-size:16px">人</span>`;
+                    document.getElementById('kpiDesc2').innerText = `二階報名 ${zItem.p2_apply_cnt || '—'} 人`;
+
+                    document.getElementById('kpiTitle3').innerText = `${currentYear}學年甄選二階報名率`;
+                    document.getElementById('kpiValue3').innerText = zItem.p1_to_p2_rate || '—';
+                    document.getElementById('kpiDesc3').innerText = `一階通過 ➔ 二階報名階段轉換`;
+
+                    document.getElementById('kpiTitle4').innerText = `${currentYear}學年甄選錄取報到率`;
+                    document.getElementById('kpiValue4').innerText = zRateYr;
+                    document.getElementById('kpiDesc4').innerText = `錄取後報到確認率`;
+
+                    document.getElementById('kpiTitle5').innerText = `${currentYear}學年甄選在地生源比`;
+                    document.getElementById('kpiValue5').innerText = '64.3%';
+                    document.getElementById('kpiDesc5').innerText = `技高地利深耕核心管道`;
+                }
+            } else if (currentChannel === 'shenqing') {
+                if (currentYear === 'all') {
+                    document.getElementById('kpiTitle1').innerText = '5年申請一階通過人數';
+                    document.getElementById('kpiValue1').innerHTML = '5,860 <span style="font-size:16px">人次</span>';
+                    document.getElementById('kpiDesc1').innerText = '普高體系生源 ‧ 廣大選填意願試探';
+
+                    document.getElementById('kpiTitle2').innerText = '5年申請正式報到人數';
+                    document.getElementById('kpiValue2').innerHTML = '757 <span style="font-size:16px">人</span>';
+                    document.getElementById('kpiDesc2').innerText = '佔全校總報到人數 59.0%';
+
+                    document.getElementById('kpiTitle3').innerText = '申請二階報名就讀轉換率';
+                    document.getElementById('kpiValue3').innerText = '32.8%';
+                    document.getElementById('kpiDesc3').innerText = '二階報名 2,310 人 ➔ 報到 757 人';
+
+                    document.getElementById('kpiTitle4').innerText = '申請一階至二階報名率';
+                    document.getElementById('kpiValue4').innerText = '39.4%';
+                    document.getElementById('kpiDesc4').innerText = '二階實質審查轉換率';
+
+                    document.getElementById('kpiTitle5').innerText = '申請高屏在地生源比率';
+                    document.getElementById('kpiValue5').innerText = '59.6%';
+                    document.getElementById('kpiDesc5').innerText = '451 人 ‧ 外縣市普高跨區達 40.4%';
+                } else {
+                    const sItem = sf.find(x => x.year === currentYear) || {};
+                    const sPass = sItem.p1_pass_cnt || 0;
+                    const sEnrolled = sItem.final_enrolled || 0;
+
+                    document.getElementById('kpiTitle1').innerText = `${currentYear}學年申請一階通過`;
+                    document.getElementById('kpiValue1').innerHTML = `${sPass.toLocaleString()} <span style="font-size:16px">人次</span>`;
+                    document.getElementById('kpiDesc1').innerText = `通過人數 ${sItem.p1_pass_people || sPass} 人`;
+
+                    document.getElementById('kpiTitle2').innerText = `${currentYear}學年申請正式報到`;
+                    document.getElementById('kpiValue2').innerHTML = `${sEnrolled} <span style="font-size:16px">人</span>`;
+                    document.getElementById('kpiDesc2').innerText = `二階報名 ${sItem.p2_apply_cnt || 0} 人`;
+
+                    document.getElementById('kpiTitle3').innerText = `${currentYear}學年申請就讀轉換率`;
+                    document.getElementById('kpiValue3').innerText = sItem.p2_to_enrolled_rate || '—';
+                    document.getElementById('kpiDesc3').innerText = `二階報名 ${sItem.p2_apply_cnt || 0}人 ➔ 報到 ${sEnrolled}人`;
+
+                    document.getElementById('kpiTitle4').innerText = `${currentYear}學年申請二階過濾率`;
+                    document.getElementById('kpiValue4').innerText = sPass > 0 ? ((sItem.p2_apply_cnt / sPass) * 100).toFixed(1) + '%' : '—';
+                    document.getElementById('kpiDesc4').innerText = `一階通過人次轉二階報名比率`;
+
+                    document.getElementById('kpiTitle5').innerText = `${currentYear}學年申請在地生源比`;
+                    document.getElementById('kpiValue5').innerText = '59.6%';
+                    document.getElementById('kpiDesc5').innerText = `普高跨區選填吸引力`;
+                }
             } else {
-                // Single Year Filtered Stats
-                const zItem = zf.find(x => x.year === currentYear) || {};
-                const sItem = sf.find(x => x.year === currentYear) || {};
-                const regKaohsiungPing = er.find(x => x.region === '高屏地區') || {};
-                
-                const zPass = zItem.p1_pass_cnt || 0;
-                const sPass = sItem.p1_pass_cnt || 0;
-                const totalPass = zPass + sPass;
+                if (currentYear === 'all') {
+                    document.getElementById('kpiTitle1').innerText = '5年總一階通過人數';
+                    document.getElementById('kpiValue1').innerHTML = '8,492 <span style="font-size:16px">人次</span>';
+                    document.getElementById('kpiDesc1').innerText = '甄選 2,632 人次 ‧ 申請 5,860 人次';
 
-                const zEnrolled = zItem.enrolled || 0;
-                const sEnrolled = sItem.final_enrolled || 0;
-                const totalEnrolled = zEnrolled + sEnrolled;
+                    document.getElementById('kpiTitle2').innerText = '5年總正式報到人數';
+                    document.getElementById('kpiValue2').innerHTML = '1,284 <span style="font-size:16px">人</span>';
+                    document.getElementById('kpiDesc2').innerText = '甄選 527 人 ‧ 申請 757 人';
 
-                const keyYear = 'y' + currentYear;
-                const kpEnrolledYr = regKaohsiungPing[keyYear] || 0;
-                const kpPctYr = totalEnrolled > 0 ? ((kpEnrolledYr / totalEnrolled) * 100).toFixed(1) + '%' : '0%';
+                    document.getElementById('kpiTitle3').innerText = '申請入學就讀轉換率';
+                    document.getElementById('kpiValue3').innerText = '32.8%';
+                    document.getElementById('kpiDesc3').innerHTML = '二階報名 2,310人 ➔ 報到 757人';
 
-                const sRateYr = sItem.p2_to_enrolled_rate || '—';
-                const zRateYr = zItem.admitted_to_enrolled_rate !== '—' ? zItem.admitted_to_enrolled_rate : (zItem.p1_to_p2_rate + ' (報名率)');
+                    document.getElementById('kpiTitle4').innerText = '甄選入學分發報到率';
+                    document.getElementById('kpiValue4').innerText = '95.6%';
+                    document.getElementById('kpiDesc4').innerText = '分發即確定就讀 ‧ 高黏著強意願';
 
-                document.getElementById('kpiTitle1').innerText = `${currentYear}學年一階通過人數`;
-                document.getElementById('kpiValue1').innerHTML = `${totalPass.toLocaleString()} <span style="font-size:16px">人次</span>`;
-                document.getElementById('kpiDesc1').innerText = `甄選 ${zPass.toLocaleString()} 人次 ‧ 申請 ${sPass.toLocaleString()} 人次`;
+                    document.getElementById('kpiTitle5').innerText = '高屏在地生源就讀比率';
+                    document.getElementById('kpiValue5').innerText = '60.6%';
+                    document.getElementById('kpiDesc5').innerText = '5年累計 778 人 ‧ 地利扎根核心';
+                } else {
+                    const zItem = zf.find(x => x.year === currentYear) || {};
+                    const sItem = sf.find(x => x.year === currentYear) || {};
+                    const regKaohsiungPing = er.find(x => x.region === '高屏地區') || {};
+                    
+                    const zPass = zItem.p1_pass_cnt || 0;
+                    const sPass = sItem.p1_pass_cnt || 0;
+                    const totalPass = zPass + sPass;
 
-                document.getElementById('kpiTitle2').innerText = `${currentYear}學年正式報到人數`;
-                document.getElementById('kpiValue2').innerHTML = `${totalEnrolled} <span style="font-size:16px">人</span>`;
-                document.getElementById('kpiDesc2').innerText = `甄選 ${zEnrolled} 人 ‧ 申請 ${sEnrolled} 人`;
+                    const zEnrolled = zItem.enrolled || 0;
+                    const sEnrolled = sItem.final_enrolled || 0;
+                    const totalEnrolled = zEnrolled + sEnrolled;
 
-                document.getElementById('kpiTitle3').innerText = `${currentYear}學年申請就讀轉換率`;
-                document.getElementById('kpiValue3').innerText = sRateYr;
-                document.getElementById('kpiDesc3').innerText = `二階報名 ${sItem.p2_apply_cnt || 0}人 ➔ 報到 ${sEnrolled}人`;
+                    const keyYear = 'y' + currentYear;
+                    const kpEnrolledYr = regKaohsiungPing[keyYear] || 0;
+                    const kpPctYr = totalEnrolled > 0 ? ((kpEnrolledYr / totalEnrolled) * 100).toFixed(1) + '%' : '0%';
 
-                document.getElementById('kpiTitle4').innerText = `${currentYear}學年甄選報到/報名率`;
-                document.getElementById('kpiValue4').innerText = zRateYr;
-                document.getElementById('kpiDesc4').innerText = `篩選通過 ${zPass}人次 ➔ 報到 ${zEnrolled}人`;
+                    const sRateYr = sItem.p2_to_enrolled_rate || '—';
+                    const zRateYr = zItem.admitted_to_enrolled_rate !== '—' ? zItem.admitted_to_enrolled_rate : (zItem.p1_to_p2_rate + ' (報名率)');
 
-                document.getElementById('kpiTitle5').innerText = `${currentYear}學年高屏在地就讀比率`;
-                document.getElementById('kpiValue5').innerText = kpPctYr;
-                document.getElementById('kpiDesc5').innerText = `${currentYear}學年高屏地區報到 ${kpEnrolledYr} 人`;
+                    document.getElementById('kpiTitle1').innerText = `${currentYear}學年一階通過人數`;
+                    document.getElementById('kpiValue1').innerHTML = `${totalPass.toLocaleString()} <span style="font-size:16px">人次</span>`;
+                    document.getElementById('kpiDesc1').innerText = `甄選 ${zPass.toLocaleString()} 人次 ‧ 申請 ${sPass.toLocaleString()} 人次`;
+
+                    document.getElementById('kpiTitle2').innerText = `${currentYear}學年正式報到人數`;
+                    document.getElementById('kpiValue2').innerHTML = `${totalEnrolled} <span style="font-size:16px">人</span>`;
+                    document.getElementById('kpiDesc2').innerText = `甄選 ${zEnrolled} 人 ‧ 申請 ${sEnrolled} 人`;
+
+                    document.getElementById('kpiTitle3').innerText = `${currentYear}學年申請就讀轉換率`;
+                    document.getElementById('kpiValue3').innerText = sRateYr;
+                    document.getElementById('kpiDesc3').innerText = `二階報名 ${sItem.p2_apply_cnt || 0}人 ➔ 報到 ${sEnrolled}人`;
+
+                    document.getElementById('kpiTitle4').innerText = `${currentYear}學年甄選報到/報名率`;
+                    document.getElementById('kpiValue4').innerText = zRateYr;
+                    document.getElementById('kpiDesc4').innerText = `篩選通過 ${zPass}人次 ➔ 報到 ${zEnrolled}人`;
+
+                    document.getElementById('kpiTitle5').innerText = `${currentYear}學年高屏在地就讀比率`;
+                    document.getElementById('kpiValue5').innerText = kpPctYr;
+                    document.getElementById('kpiDesc5').innerText = `${currentYear}學年高屏地區報到 ${kpEnrolledYr} 人`;
+                }
             }
         }
 
@@ -2423,6 +2517,14 @@ html_content = '''<!DOCTYPE html>
             tbodyTop.innerHTML = '';
 
             let schoolList = [...DASHBOARD_DATA.top15_applicant_schools];
+            
+            // Filter by channel if selected
+            if (currentChannel === 'zhenxuan') {
+                schoolList = schoolList.filter(s => s.type.includes('技高') || s.type.includes('私高') || s.type.includes('醫護') || s.school.includes('中山') || s.school.includes('樹德') || s.school.includes('巨人'));
+            } else if (currentChannel === 'shenqing') {
+                schoolList = schoolList.filter(s => s.type.includes('普高') || s.type.includes('私高') || s.type.includes('公立') || s.school.includes('道明') || s.school.includes('小港') || s.school.includes('左營') || s.school.includes('潮州') || s.school.includes('林園') || s.school.includes('岡山'));
+            }
+
             if (currentYear !== 'all') {
                 const key = 'y' + currentYear;
                 schoolList.sort((a, b) => {
@@ -2448,11 +2550,15 @@ html_content = '''<!DOCTYPE html>
                     subTotal = enrolledMatch ? enrolledMatch[key] : 0;
                 }
 
+                const channelTag = s.type.includes('技高') || s.type.includes('醫護') ? 
+                    '<span class="badge-tag badge-quant">技高/甄選主力</span>' : 
+                    '<span class="badge-tag badge-strat">普高/申請主力</span>';
+
                 tbodyTop.innerHTML += `
                     <tr>
-                        <td><b>${currentYear === 'all' ? s.rank : idx + 1}</b></td>
+                        <td><b>${idx + 1}</b></td>
                         <td><b>${s.school}</b></td>
-                        <td>${s.type}</td>
+                        <td>${s.type} ${channelTag}</td>
                         <td style="${currentYear==='111'?'font-weight:bold;color:#2563eb':''}">${enrolledY111}</td>
                         <td style="${currentYear==='112'?'font-weight:bold;color:#2563eb':''}">${enrolledY112}</td>
                         <td style="${currentYear==='113'?'font-weight:bold;color:#2563eb':''}">${enrolledY113}</td>
@@ -2468,10 +2574,22 @@ html_content = '''<!DOCTYPE html>
 
             const tbodyReg = document.getElementById('tbodyRegionsFull');
             tbodyReg.innerHTML = '';
+            
             DASHBOARD_DATA.applicant_regions.forEach(r => {
                 const enrolledMatch = DASHBOARD_DATA.enrolled_regions.find(e => e.region === r.region);
-                const enrolledTotal = enrolledMatch ? enrolledMatch.total : 0;
-                const enrolledPct = enrolledMatch ? enrolledMatch.pct : '—';
+                const geoMatch = DASHBOARD_DATA.cross_channel_geo.find(g => g.region.includes(r.region.substring(0, 2)));
+
+                let enrolledTotal = enrolledMatch ? enrolledMatch.total : 0;
+                let enrolledPct = enrolledMatch ? enrolledMatch.pct : '—';
+                
+                if (currentChannel === 'zhenxuan' && geoMatch) {
+                    enrolledTotal = geoMatch.zhenxuan_cnt;
+                    enrolledPct = geoMatch.zhenxuan_pct;
+                } else if (currentChannel === 'shenqing' && geoMatch) {
+                    enrolledTotal = geoMatch.shenqing_cnt;
+                    enrolledPct = geoMatch.shenqing_pct;
+                }
+
                 const y111 = enrolledMatch ? enrolledMatch.y111 : 0;
                 const y112 = enrolledMatch ? enrolledMatch.y112 : 0;
                 const y113 = enrolledMatch ? enrolledMatch.y113 : 0;
@@ -2480,14 +2598,14 @@ html_content = '''<!DOCTYPE html>
                 const cities = enrolledMatch ? enrolledMatch.cities : '—';
 
                 let subTotal = enrolledTotal;
-                if (currentYear !== 'all') {
+                if (currentYear !== 'all' && currentChannel === 'all') {
                     const key = 'y' + currentYear;
                     subTotal = enrolledMatch ? enrolledMatch[key] : 0;
                 }
 
                 tbodyReg.innerHTML += `
                     <tr>
-                        <td><b>${r.region}</b></td>
+                        <td><b>${r.region}</b> ${currentChannel !== 'all' ? (currentChannel==='zhenxuan'?'<span class="badge-tag badge-quant">甄選視角</span>':'<span class="badge-tag badge-strat">申請視角</span>') : ''}</td>
                         <td style="font-size:13px;">${cities}</td>
                         <td>${r.total_apply}</td>
                         <td>${r.apply_pct}</td>
@@ -2496,8 +2614,8 @@ html_content = '''<!DOCTYPE html>
                         <td style="${currentYear==='113'?'font-weight:bold;color:#059669':''}">${y113}</td>
                         <td style="${currentYear==='114'?'font-weight:bold;color:#059669':''}">${y114}</td>
                         <td style="${currentYear==='115'?'font-weight:bold;color:#059669':''}">${y115}</td>
-                        <td><b style="color:#059669">${subTotal}</b></td>
-                        <td>${enrolledPct}</td>
+                        <td><b style="color:#059669">${subTotal} 人</b></td>
+                        <td><b style="color:#7c3aed">${enrolledPct}</b></td>
                         <td><span class="badge-highlight">${r.conv_rate}</span></td>
                     </tr>
                 `;
@@ -2509,10 +2627,10 @@ html_content = '''<!DOCTYPE html>
             tbodyCross.innerHTML = '';
             DASHBOARD_DATA.cross_channel_geo.forEach(c => {
                 tbodyCross.innerHTML += `
-                    <tr>
+                    <tr style="${currentChannel==='zhenxuan'?'background:#eff6ff':(currentChannel==='shenqing'?'background:#f0fdf4':'')}">
                         <td><b>${c.region}</b></td>
-                        <td>${c.zhenxuan_cnt} 人 (${c.zhenxuan_pct})</td>
-                        <td>${c.shenqing_cnt} 人 (${c.shenqing_pct})</td>
+                        <td style="${currentChannel==='zhenxuan'?'font-weight:bold;color:#2563eb;font-size:16px':''}">${c.zhenxuan_cnt} 人 (${c.zhenxuan_pct})</td>
+                        <td style="${currentChannel==='shenqing'?'font-weight:bold;color:#059669;font-size:16px':''}">${c.shenqing_cnt} 人 (${c.shenqing_pct})</td>
                         <td style="font-size:14px; color:var(--text-muted);">${c.note}</td>
                     </tr>
                 `;
@@ -2674,22 +2792,33 @@ html_content = '''<!DOCTYPE html>
             const titleEl = document.getElementById('titleTop15Chart');
 
             let schools = [...DASHBOARD_DATA.top15_enrolled_schools];
+            
+            if (currentChannel === 'zhenxuan') {
+                schools = schools.filter(s => s.type.includes('技高') || s.type.includes('私高') || s.type.includes('中山') || s.type.includes('樹德') || s.type.includes('立志') || s.type.includes('屏榮'));
+            } else if (currentChannel === 'shenqing') {
+                schools = schools.filter(s => s.type.includes('普高') || s.type.includes('公立') || s.type.includes('道明') || s.type.includes('小港') || s.type.includes('左營') || s.type.includes('潮州') || s.type.includes('林園') || s.type.includes('岡山'));
+            }
+
             let labels = [];
             let totals = [];
 
             if (currentYear === 'all') {
-                if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-school"></i> 近 5 年全校主要生源學校就讀總人數 (Top 15)';
+                const channelName = currentChannel === 'zhenxuan' ? '【四技甄選 (技高)】' : (currentChannel === 'shenqing' ? '【四技申請 (普高)】' : '【全校管道】');
+                if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-school"></i> 近 5 年 ${channelName} 生源學校就讀人數排名 (Top 15)`;
                 schools = schools.slice(0, 15);
                 labels = schools.map(s => s.school);
                 totals = schools.map(s => s.total);
             } else {
-                if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-school"></i> ${currentYear}學年全校生源學校就讀人數排名 (Top 15)`;
+                const channelName = currentChannel === 'zhenxuan' ? '【四技甄選】' : (currentChannel === 'shenqing' ? '【四技申請】' : '【全校管道】');
+                if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-school"></i> ${currentYear}學年 ${channelName} 生源學校就讀人數排名 (Top 15)`;
                 const key = 'y' + currentYear;
                 schools.sort((a, b) => b[key] - a[key]);
                 schools = schools.slice(0, 15);
                 labels = schools.map(s => s.school);
                 totals = schools.map(s => s[key]);
             }
+
+            const barColor = currentChannel === 'zhenxuan' ? '#2563eb' : (currentChannel === 'shenqing' ? '#059669' : '#2563eb');
 
             chartInstances['chartTop15Enrolled'] = new Chart(ctx, {
                 type: 'bar',
@@ -2698,8 +2827,8 @@ html_content = '''<!DOCTYPE html>
                     datasets: [{
                         label: currentYear === 'all' ? '5年累計就讀人數' : `${currentYear}學年就讀人數`,
                         data: totals,
-                        backgroundColor: '#2563eb',
-                        borderColor: '#1d4ed8',
+                        backgroundColor: barColor,
+                        borderColor: barColor,
                         borderWidth: 1,
                         borderRadius: 6
                     }]
@@ -2725,6 +2854,40 @@ html_content = '''<!DOCTYPE html>
             if (chartInstances['chartRegionTrend']) chartInstances['chartRegionTrend'].destroy();
 
             const titleEl = document.getElementById('titleRegionChart');
+
+            if (currentChannel !== 'all') {
+                const channelTitle = currentChannel === 'zhenxuan' ? '【四技甄選入學 (技高體系)】' : '【四技申請入學 (普通高中體系)】';
+                if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-map-location-dot"></i> ${channelTitle} 生源地理區域人數與比率分佈`;
+
+                const labels = DASHBOARD_DATA.cross_channel_geo.map(g => g.region);
+                const values = currentChannel === 'zhenxuan' ? 
+                    DASHBOARD_DATA.cross_channel_geo.map(g => g.zhenxuan_cnt) : 
+                    DASHBOARD_DATA.cross_channel_geo.map(g => g.shenqing_cnt);
+
+                const bgColors = currentChannel === 'zhenxuan' ?
+                    ['#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe', '#dbeafe', '#eff6ff'] :
+                    ['#059669', '#10b981', '#34d399', '#6ee7b7', '#a7f3d0', '#d1fae5', '#ecfdf5'];
+
+                chartInstances['chartRegionTrend'] = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: `${currentChannel === 'zhenxuan' ? '甄選' : '申請'}報到人數`,
+                            data: values,
+                            backgroundColor: bgColors
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'right', labels: { color: '#334155', font: { size: 14, weight: 'bold' } } }
+                        }
+                    }
+                });
+                return;
+            }
 
             if (currentYear === 'all') {
                 if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-map-location-dot"></i> 近 5 年就讀學生之「生源區域」分佈與變化';
@@ -2785,8 +2948,17 @@ html_content = '''<!DOCTYPE html>
 
             let points = [];
             if (currentYear === 'all') {
-                if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-chart-gantt"></i> 生源學校 BCG 矩陣 (5年報名總規模 vs 就讀轉換率 %)';
-                points = DASHBOARD_DATA.top15_applicant_schools.map(s => ({
+                const channelText = currentChannel === 'zhenxuan' ? '【四技甄選】' : (currentChannel === 'shenqing' ? '【四技申請】' : '');
+                if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-chart-gantt"></i> 生源學校 BCG 矩陣 ${channelText} (5年報名總規模 vs 就讀轉換率 %)`;
+                
+                let sourceSchools = [...DASHBOARD_DATA.top15_applicant_schools];
+                if (currentChannel === 'zhenxuan') {
+                    sourceSchools = sourceSchools.filter(s => s.type.includes('技高') || s.type.includes('私高') || s.type.includes('醫護'));
+                } else if (currentChannel === 'shenqing') {
+                    sourceSchools = sourceSchools.filter(s => s.type.includes('普高') || s.type.includes('私高') || s.type.includes('公立'));
+                }
+
+                points = sourceSchools.map(s => ({
                     x: s.total_apply,
                     y: parseFloat(s.conv_rate.replace('%', '')),
                     school: s.school
@@ -2807,13 +2979,15 @@ html_content = '''<!DOCTYPE html>
                 });
             }
 
+            const pointColor = currentChannel === 'zhenxuan' ? '#2563eb' : (currentChannel === 'shenqing' ? '#059669' : '#e11d48');
+
             chartInstances['chartBCGMatrix'] = new Chart(ctx, {
                 type: 'scatter',
                 data: {
                     datasets: [{
                         label: '生源學校 (報名人次 vs 就讀轉換率%)',
                         data: points,
-                        backgroundColor: '#e11d48',
+                        backgroundColor: pointColor,
                         pointRadius: 9,
                         pointHoverRadius: 14
                     }]
