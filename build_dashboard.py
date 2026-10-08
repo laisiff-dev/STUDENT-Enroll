@@ -2546,10 +2546,6 @@ html_content = '''<!DOCTYPE html>
                 const enrolledY115 = enrolledMatch ? enrolledMatch.y115 : 0;
                 
                 let subTotal = s.total_enrolled;
-                if (currentYear !== 'all') {
-                    const key = 'y' + currentYear;
-                    subTotal = enrolledMatch ? enrolledMatch[key] : 0;
-                }
 
                 const channelTag = s.type.includes('技高') || s.type.includes('醫護') ? 
                     '<span class="badge-tag badge-quant">技高/甄選主力</span>' : 
@@ -2599,10 +2595,6 @@ html_content = '''<!DOCTYPE html>
                 const cities = enrolledMatch ? enrolledMatch.cities : '—';
 
                 let subTotal = enrolledTotal;
-                if (currentYear !== 'all' && currentChannel === 'all') {
-                    const key = 'y' + currentYear;
-                    subTotal = enrolledMatch ? enrolledMatch[key] : 0;
-                }
 
                 tbodyReg.innerHTML += `
                     <tr>
