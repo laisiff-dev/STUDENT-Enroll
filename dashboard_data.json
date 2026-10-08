@@ -26,11 +26,11 @@
       "year": "113",
       "p1_pass_cnt": 556,
       "p1_pass_people": 461,
-      "p2_apply_cnt": null,
-      "p2_apply_people": null,
+      "p2_apply_cnt": 247,
+      "p2_apply_people": 247,
       "admitted": 114,
       "enrolled": 109,
-      "p1_to_p2_rate": "—",
+      "p1_to_p2_rate": "53.6%",
       "admitted_to_enrolled_rate": "95.6%"
     },
     {
@@ -50,10 +50,10 @@
       "p1_pass_people": 353,
       "p2_apply_cnt": 162,
       "p2_apply_people": 162,
-      "admitted": null,
+      "admitted": 148,
       "enrolled": 78,
       "p1_to_p2_rate": "45.9%",
-      "admitted_to_enrolled_rate": "—"
+      "admitted_to_enrolled_rate": "52.7%"
     }
   ],
   "zhenxuan_depts": [

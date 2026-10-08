@@ -901,6 +901,7 @@ html_content = '''<!DOCTYPE html>
                 <div class="analysis-box">
                     <div class="analysis-item"><span class="badge-tag badge-quant">量化</span> 一階篩選通過自 111年 793人次調降至 115年 353人次，實際報到自 161人調整至 78人。</div>
                     <div class="analysis-item"><span class="badge-tag badge-qual">質化</span> 分發錄取後報到意願高達 95.6%，顯示學生選填後對本校黏著度極高。</div>
+                    <div class="analysis-item"><span class="badge-tag badge-strat">最新數據</span> 113學年「二階報名」數據已更新為 247 人 (247人次)；115學年「錄取人數」已更新為 148 人 (正取130/備取18)。</div>
                 </div>
             </div>
 
@@ -1263,11 +1264,11 @@ html_content = '''<!DOCTYPE html>
       "year": "113",
       "p1_pass_cnt": 556,
       "p1_pass_people": 461,
-      "p2_apply_cnt": null,
-      "p2_apply_people": null,
+      "p2_apply_cnt": 247,
+      "p2_apply_people": 247,
       "admitted": 114,
       "enrolled": 109,
-      "p1_to_p2_rate": "—",
+      "p1_to_p2_rate": "53.6%",
       "admitted_to_enrolled_rate": "95.6%"
     },
     {
@@ -1287,10 +1288,10 @@ html_content = '''<!DOCTYPE html>
       "p1_pass_people": 353,
       "p2_apply_cnt": 162,
       "p2_apply_people": 162,
-      "admitted": null,
+      "admitted": 148,
       "enrolled": 78,
       "p1_to_p2_rate": "45.9%",
-      "admitted_to_enrolled_rate": "—"
+      "admitted_to_enrolled_rate": "52.7%"
     }
   ],
   "zhenxuan_depts": [
@@ -2657,7 +2658,7 @@ html_content = '''<!DOCTYPE html>
                 if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-filter"></i> 四技甄選入學 (技高) 歷年各階段人數消長 (111~115學年)';
                 const labels = ['111學年', '112學年', '113學年', '114學年', '115學年'];
                 const dataP1 = [793, 531, 556, 399, 353];
-                const dataP2 = [422, 230, 0, 162, 162];
+                const dataP2 = [422, 230, 247, 162, 162];
                 const dataEnrolled = [161, 93, 109, 86, 78];
 
                 chartInstances['chartZhenxuanFunnel'] = new Chart(ctx, {
@@ -2673,7 +2674,9 @@ html_content = '''<!DOCTYPE html>
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#334155', font: { size: 14, weight: 'bold' } } } },
+                        plugins: { 
+                            legend: { labels: { color: '#334155', font: { size: 14, weight: 'bold' } } }
+                        },
                         scales: {
                             x: { ticks: { color: '#475569', font: { size: 13 } }, grid: { color: 'rgba(0,0,0,0.06)' } },
                             y: { ticks: { color: '#475569', font: { size: 13 } }, grid: { color: 'rgba(0,0,0,0.06)' } }
